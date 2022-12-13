@@ -1,6 +1,7 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
+import 'package:mobile_banking/pages/dashboard_page.dart';
 import 'package:mobile_banking/theme/color.dart';
 
 class RootPage extends StatefulWidget {
@@ -62,15 +63,7 @@ class _RootPageState extends State<RootPage> {
     return IndexedStack(
       index: pageIndex,
       children: const [
-        Center(
-          child: Text(
-            "DASHBOARD",
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
+        DashboardPage(),
         Center(
           child: Text(
             "COMMENTS",
