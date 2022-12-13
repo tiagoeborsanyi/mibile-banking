@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:mobile_banking/data_json/balance_json.dart';
+import 'package:mobile_banking/pages/card_page.dart';
 import 'package:mobile_banking/theme/color.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -37,7 +38,7 @@ class _DashboardPageState extends State<DashboardPage> {
       actions: [
         IconButton(
           onPressed: () {},
-          icon: Icon(AntDesign.search1),
+          icon: const Icon(AntDesign.search1),
         ),
       ],
     );
@@ -355,58 +356,67 @@ class _DashboardPageState extends State<DashboardPage> {
           const SizedBox(height: 15),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 15),
-            child: Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: white,
-                borderRadius: BorderRadius.circular(12),
-                boxShadow: [
-                  BoxShadow(
-                    color: grey.withOpacity(.25),
-                    spreadRadius: 10,
-                    blurRadius: 10,
-                  ),
-                ],
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(18.0),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                              width: 40,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                color: secondary.withOpacity(.3),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: const Center(
-                                child: Icon(
-                                  AntDesign.creditcard,
-                                  color: primary,
-                                  size: 20,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 15),
-                            const Text(
-                              "EUR *2330",
-                              style: TextStyle(fontSize: 15),
-                            ),
-                          ],
-                        ),
-                        const Text(
-                          "8 199.24 EUR",
-                          style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.w600),
-                        ),
-                      ],
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const CardPage(),
+                    ));
+              },
+              child: Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: white,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: grey.withOpacity(.25),
+                      spreadRadius: 10,
+                      blurRadius: 10,
                     ),
                   ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(18.0),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  color: secondary.withOpacity(.3),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: const Center(
+                                  child: Icon(
+                                    AntDesign.creditcard,
+                                    color: primary,
+                                    size: 20,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 15),
+                              const Text(
+                                "EUR *2330",
+                                style: TextStyle(fontSize: 15),
+                              ),
+                            ],
+                          ),
+                          const Text(
+                            "8 199.24 EUR",
+                            style: TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.w600),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
