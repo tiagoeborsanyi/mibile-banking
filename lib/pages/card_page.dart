@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:mobile_banking/data_json/card_json.dart';
+import 'package:mobile_banking/data_json/card_operations_json.dart';
 import 'package:mobile_banking/theme/color.dart';
 
 class CardPage extends StatefulWidget {
@@ -58,26 +59,159 @@ class _CardPageState extends State<CardPage> {
   Widget getBody() {
     var size = MediaQuery.of(context).size;
     final PageController controller = PageController();
-    return Column(
-      children: [
-        const SizedBox(height: 10),
-        SizedBox(
-          width: double.infinity,
-          height: 240,
-          child: PageView(
-            controller: controller,
-            children: List.generate(cardLists.length, (index) {
-              return getCards(
-                cardLists[index]['amount'],
-                cardLists[index]['currency'],
-                cardLists[index]['card_number'],
-                cardLists[index]['valid_date'],
-                cardLists[index]['bg_color'],
-              );
-            }),
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          const SizedBox(height: 10),
+          SizedBox(
+            width: double.infinity,
+            height: 240,
+            child: PageView(
+              controller: controller,
+              children: List.generate(cardLists.length, (index) {
+                return getCards(
+                  cardLists[index]['amount'],
+                  cardLists[index]['currency'],
+                  cardLists[index]['card_number'],
+                  cardLists[index]['valid_date'],
+                  cardLists[index]['bg_color'],
+                );
+              }),
+            ),
           ),
-        )
-      ],
+          const SizedBox(height: 20),
+          Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+                color: white,
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    color: grey.withOpacity(.2),
+                    spreadRadius: 10,
+                    blurRadius: 10,
+                  ),
+                ]),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 10, bottom: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                        child: Container(
+                          width: size.width / 2,
+                          height: 55,
+                          decoration: const BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: primary,
+                                width: 3.5,
+                              ),
+                            ),
+                          ),
+                          child: const Center(
+                            child: Text(
+                              "Operações",
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: primary,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Flexible(
+                        child: Container(
+                          width: size.width / 2,
+                          height: 55,
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: black.withOpacity(.2),
+                                width: 1,
+                              ),
+                            ),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "Histórico",
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: primary.withOpacity(.5),
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Column(
+                  children: List.generate(cardOperations.length, (index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(
+                        left: 20,
+                        right: 20,
+                        bottom: 20,
+                      ),
+                      child: Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: white,
+                          borderRadius: BorderRadius.circular(15),
+                          boxShadow: [
+                            BoxShadow(
+                              color: grey.withOpacity(.2),
+                              spreadRadius: 10,
+                              blurRadius: 10,
+                            ),
+                          ],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(18.0),
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  color: secondary.withOpacity(.3),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: Center(
+                                  child: Icon(
+                                    cardOperations[index]['icon'],
+                                    size: 20,
+                                    color: primary,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 15),
+                              Text(
+                                cardOperations[index]['title'],
+                                style: const TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  }),
+                ),
+                const SizedBox(height: 30),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 
