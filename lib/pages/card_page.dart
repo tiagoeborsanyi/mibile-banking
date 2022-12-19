@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:mobile_banking/data_json/card_json.dart';
 import 'package:mobile_banking/theme/color.dart';
 
@@ -115,10 +116,61 @@ class _CardPageState extends State<CardPage> {
             color: bgColor,
             borderRadius: BorderRadius.circular(12),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [],
+          child: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Icon(
+                  Feather.credit_card,
+                  size: 30,
+                  color: white.withOpacity(.3),
+                ),
+                const SizedBox(height: 15),
+                Flexible(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        cardNumber,
+                        style: TextStyle(
+                          color: white.withOpacity(.8),
+                          fontSize: 20,
+                          wordSpacing: 15,
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "VALID DATE",
+                                style: TextStyle(
+                                    color: white.withOpacity(.3), fontSize: 12),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                validDate,
+                                style:
+                                    const TextStyle(color: white, fontSize: 14),
+                              ),
+                            ],
+                          ),
+                          Image.asset(
+                            "assets/images/master_card_logo.png",
+                            width: 50,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ],
